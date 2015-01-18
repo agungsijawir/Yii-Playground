@@ -261,6 +261,9 @@ class XTabularInput extends CWidget
 			$this->addHtmlOptions=array_merge($this->addHtmlOptions, array('class'=>$this->addCssClass));
 		else
 			$this->addHtmlOptions['class'].=' '.$this->addCssClass;
+			
+		if($this->models===array())
+			$this->headerHtmlOptions=array_merge($this->headerHtmlOptions, array('style'=>'display:none'));			
 	}
 
 	/**
@@ -320,7 +323,7 @@ class XTabularInput extends CWidget
 	$("#{$this->id} .{$this->removeCssClass}").live("click", function(event) {
 		event.preventDefault();
 		$(this).parents(".{$this->inputCssClass}:first").remove();
-		$('.{$this->inputContainerCssClass}').filter(function(){return $.trim($(this).text())===''}).siblings('.{$this->headerCssClass}').hide();
+		$('.{$this->inputContainerCssClass}').filter(function(){return $.trim($(this).text())==='' && $(this).children().length == 0}).siblings('.{$this->headerCssClass}').hide();
 	});
 SCRIPT;
 
